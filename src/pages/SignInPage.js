@@ -5,16 +5,19 @@ import '../App.css';
 
 function SignInPage()
 {
+    // set up variables to hold form input and save
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
 
+    // display form for user login:
+    // Variables to be recorded and submitted: username, password, and confirmPassword
+    // submission handled by userLogin()
     return(
         <div>
             <br />
             <p>Sign in, or create a new login.</p>
             <div id="user-form">
-                <form id="user-login-form" onSubmit={e => {e.preventDefault(); getUserList("http://localhost:4000/sign-in")}}>
+                <form id="user-login-form" onSubmit={e => {e.preventDefault(); userLogin()}}>
                     <label for="username">Username: </label>
                     <input type="text" required
                         id="username"
@@ -41,27 +44,29 @@ function SignInPage()
         
     )
 
-    function getUserList(url){
-        fetch(url)
-            .then(response => response.json())
-            .then(data => verifyUser(data))
-            .catch(error => console.log(error))
+    // send POST request with username and password; response will contain string
+    function userLogin(){
+        var loginData = {
+            u: username,
+            p: password
+        }
+
+        fetch("http://localhost:4000/sign-in", {
+            method:'POST',
+            body: JSON.stringify(loginData),
+            headers: {
+                "Accept": "application/json",
+                "content-type": "application/json"
+            }
+        })
+        .then(response => response.text())
+        .then(body => verifyUser(body))
     }
     
+    // display alert with response from microservice
     function verifyUser(data)
     {
-        console.log(data);
-
-        for(let i = 0; i < data.length; i++)
-        {if ((data[i].user.username.toUpperCase() === username.toUpperCase())
-            && (data[i].user.password === password))
-            {
-                window.location = "/"
-                alert("Welcome " + data[i].user.name + "!")
-                return
-            };
-        }
-        alert("Not recognized!")
+        alert(data)
     }
 }
 
