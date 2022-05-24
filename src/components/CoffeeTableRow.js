@@ -11,6 +11,7 @@ function CoffeeTableRow({item}) {
     )
 }
 
+// format prices as USD: 2 decimal units and dollar sign
 const numberFormat = (value) =>
   new Intl.NumberFormat('en-in', {
     style: 'currency',

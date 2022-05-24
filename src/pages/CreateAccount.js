@@ -5,42 +5,12 @@ import '../App.css';
 
 function CreateAccount()
 {
-
+    // initiate variables for user creation
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
-/*     let handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            let res = await fetch("http://localhost:4000/new-user", {mode: 'no-cors'}, {
-                method: "POST",
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    username: username,
-                    password: password,                    
-                })
-            })
-            let resJson = await res.json();
-            if (res.status === 200) {
-                setName("");
-                setEmail("");
-                setUserName("");
-                setPassword("");
-                setMessage("User created successfully");
-                console.log("Successful!")
-            }
-            else {
-                setMessage("Some error occurred");
-            }
-        }
-        catch (err) {
-            console.log(err);
-        }
-    } */
 
     return(
         <div>
@@ -98,10 +68,7 @@ function CreateAccount()
         
     )
 
-    function addNewUser(){
-        return
-    }
-
+    // send POST request with name, email, username, and password; Response will be string
     function newUserAdd(){
         var newUserData = {
             n: name,
@@ -109,8 +76,6 @@ function CreateAccount()
             u: username,
             p: password
         }
-
-        console.log(JSON.stringify(newUserData))
 
         fetch("http://localhost:4000/new-user", {
             method:'POST',
@@ -120,12 +85,19 @@ function CreateAccount()
                 "content-type": "application/json"
             }
         })
-        .then(response => console.log(response))
-        .then(json => console.log(json));
+        .then(response => response.text())
+        .then(body => verifyUserCreation(body))
     }
 
+    function verifyUserCreation(response) {
+        alert(`${response}`)
+
+        if (response == "Welcome " + name + "!")
+            window.location = "/"
+    }
+
+    // verify that passwords match before sending request
     function passwordValidation() {
-        
         if(password != confirmPassword)
         {
             alert(`${password}${confirmPassword}Passwords do not match!`)

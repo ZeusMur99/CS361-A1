@@ -1,11 +1,13 @@
+// import stylesheet and datasets
 import './App.css';
 import chocolates from './data/chocolate';
 import coffees from './data/coffee';
-import React from 'react';
 
+// import React and Router for webpage navigation
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// import components
+// import navigation components
 import Navigation from './components/Navigation.js'
 import { FcEnteringHeavenAlive } from 'react-icons/fc'
 
@@ -16,6 +18,7 @@ import ChocolateOrderPage from './pages/ChocolateOrderPage.js'
 import SignInPage from './pages/SignInPage.js'
 import CreateAccount from './pages/CreateAccount.js'
 
+// start app
 function App() {  
   return (
     <div className="App">
