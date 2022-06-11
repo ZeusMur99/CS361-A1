@@ -51,6 +51,31 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
     $ npm start
     
+## Program Breakdown
+
+### Pages
+
+This folder includes the JavaScript files used to generate the React pages, using the Router employed by Navigation.js. There are currently five javascript files in the folder:
+
+* HomePage: A simple webpage to describe the purpose of the website. It also offers some information about new features, specifically to deal with cognitive style heuristics: providing information about new features is important for both users that need explicit instructions on how to use the program and for those that like to explore.
+* CoffeeOrderPage: A webpage displaying a list (currently a table) of products, including a short description and its price. It also includes buttons to alter the number of a specific item the user would like to add to their cart, and a button at the bottom to submit their order.
+* ChocolateOrderPage: Practically identical to CoffeeOrderPage, but obviously used to deal with chocolate products.
+* SignInPage: A React form prompting for username and password. When the submit button is used, this program also communicated with a microservice running in Express (currently on localhost:4000) to validate the entered information. An alert is displayed, either confirming or denying the user's credentials. A link is also included to load the CreateAccount page.
+* CreateAccount: Another React form prompting a user for their name, email, password, and password confirmation. Like the SignInPage, this program also communicates with log-in microservice, performing some credential validation. 
+
+### Components
+
+This folder includes the JavaScript files used to generate several different types of components for the webpages rendered. This currently includes:
+
+* ItemQuantity
+* Navigation
+* Products
+* SubmitOrder
+
+### Data
+
+This folder includes javascript files containing the array object of dictionaries associated with the products to displayed on the webpage. This currently includes one file for the coffee and another for the chocolate.
+
 ## Socket
 
 This program is currently set to run in http://localhost:3000
